@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    National Parks
+{% endblock %}
+
+{% block body %}
+    <form>
+        <div>
+            <input type = "text" name = "name" placeholder = "Search for Parks"/>
+            <input type = "submit" value = "Search" />
+        </div>
+        <a href = "{% url 'park' %}">Clear Search</a>
+    </form>
+    <h1>All National Parks</h1>
+    {% for parks in parks %} 
+    <div class = "np">
+    <h3>Name: {{parks.name}}</h3>
+    <h4>State Location: {{parks.state}}</h4>
+    <h4>Size: {{parks.size}}</h4>
+    </div>
+    {% endfor %}
+{% endblock %}

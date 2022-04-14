@@ -9,14 +9,18 @@
             <input type = "text" name = "name" placeholder = "Search for Parks"/>
             <input type = "submit" value = "Search" />
         </div>
-        <a href = "{% url 'park' %}">Clear Search</a>
+        <a href = "{% url 'park_list' %}"> Clear Search </a>
+        <a href = "{% url 'park_create' %}"> Add a National Park </a>
     </form>
-    <h1>All National Parks</h1>
+    <h1>{{header}}</h1>
     {% for parks in parks %} 
     <div class = "np">
-    <h3>Name: {{parks.name}}</h3>
-    <h4>State Location: {{parks.state}}</h4>
-    <h4>Size: {{parks.size}}</h4>
+        <a href = "{% url 'park_detail' parks.pk %}">
+            <h3>Name: {{parks.name}}</h3>
+        </a>
+        <h4>State Location: {{parks.state}}</h4>
+        <h4>Size: {{parks.size}} sq. miles</h4>
+        <h4>Date of Birth: {{parks.birthday}}</h4>
     </div>
     {% endfor %}
 {% endblock %}

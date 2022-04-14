@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <div>
+        <h1>Details for {{park.name}}</h1>
+    </div>
+    <div class = "np">
+        <h4>State Location: {{park.state}}</h4>
+        <h4>Size: {{park.size}} sq. miles</h4>
+        <h4>Date of Birth: {{park.birthday}}</h4>
+    </div>
+    <div>
+        <a href = "{% url 'park_update' park.pk %}">Update National Park</a>
+        <a href = "{% url 'park_delete' park.pk %}">Delete National Park</a>
+    </div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User
 from .models import Park
@@ -35,8 +35,12 @@ class Park_Create(CreateView):
     model = Park
     fields = ['name', 'state', 'size', 'birthday']
     template_name = "park_create.html"
-    def get_success_url(self):
-        return reverse('park_detail', kwargs = {'pk': self.object.pk})
+    
+    def form_valid(self, form):
+        self.object = form.save(commit = False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/parks')
 
 class Park_Detail(DetailView):
     model = Park
@@ -53,3 +57,8 @@ class Park_Delete(DeleteView):
     model = Park
     template_name = "park_delete_confirm.html"
     success_url = "/parks/"
+
+def profile(request, username):
+    user = User.objects.get(username = username)
+    parks = Park.objects.filter(user = user)
+    return render(request, 'profile.html', {'username' : username, 'parks' : parks})

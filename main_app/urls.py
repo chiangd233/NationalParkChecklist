@@ -8,5 +8,6 @@ urlpatterns = [
     path('parks/new/', views.Park_Create.as_view(), name = "park_create"),
     path('parks/<int:pk>/', views.Park_Detail.as_view(), name = "park_detail"),
     path('parks/<int:pk>/update/', views.Park_Update.as_view(), name = "park_update"),
-    path('parks/<int:pk>/delete/', views.Park_Delete.as_view(), name = "park_delete")
+    path('parks/<int:pk>/delete/', views.Park_Delete.as_view(), name = "park_delete"),
+    path('user/<username>', views.profile, name = 'profile'),
 ]
